@@ -1,8 +1,12 @@
 import React from 'react'
+import Slider from '../../components/Slider/Slider'
+import './HomePage.css'
 
-function HomePage() {
+function HomePage({apiKey, baseUrl}) {
   return (
-    <div>HomePage</div>
+    <div className='homepage-container'>
+      <Slider apiKey={apiKey} baseUrl={baseUrl} />
+    </div>
   )
 }
 
