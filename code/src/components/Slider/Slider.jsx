@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Genres from "../Genres/Genres";
+import Ratings from "../Ratings/Ratings";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import "./Slider.css";
 
@@ -7,6 +10,8 @@ function Slider({ baseUrl, apiKey }) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [index, setIndex] = useState(0);
   const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
+  const [movieRatings, setMovieRatings] = useState([]);
+
 
   useEffect(() => {
     axios
@@ -14,6 +19,8 @@ function Slider({ baseUrl, apiKey }) {
       .then((res) => {
         console.log(res.data.results);
         setUpcomingMovies(res.data.results);
+        const rating = res.data.results.map(movie => movie.vote_average / 2)
+        setMovieRatings(rating);
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
@@ -27,15 +34,32 @@ function Slider({ baseUrl, apiKey }) {
     position: "relative",
   };
 
+  const handleRight = () => {
+    setIndex(index+1)
+    if(index === upcomingMovies.length-1) {
+      setIndex(0)
+    }
+  }
+
+  const handleLeft = () => {
+    setIndex(index-1)
+    if(index === 0) {
+      setIndex(upcomingMovies.length-1)
+    }
+  }
+
   return (
     <div style={sliderStyle}>
       <div className="slider-overlay"></div>
+      <MdKeyboardArrowLeft onClick={handleLeft} className="left-arrow" />
+      <MdKeyboardArrowRight onClick={handleRight} className="right-arrow" />
       <div className="slider-info">
         <h1>{upcomingMovies[index]?.title}</h1>
         <p className="slider-description">
           {upcomingMovies[index]?.overview.slice(0, 130)}...
         </p>
         <p>Release Date: {upcomingMovies[index]?.release_date}</p>
+        <Ratings movieRating={movieRatings[index]} />
       </div>
     </div>
   );
