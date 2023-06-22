@@ -5,20 +5,28 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/Homepage/HomePage";
 import Slider from "./components/Slider/Slider";
 
-import './App.css'
-
+import "./App.css";
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
 
   return (
     <ThemeContextProvider>
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage apiKey={apiKey} baseUrl={baseUrl} />} />
-
+          <Route
+            path="/"
+            element={
+              <HomePage
+                apiKey={apiKey}
+                baseUrl={baseUrl}
+                imageBaseUrl={imageBaseUrl}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </ThemeContextProvider>

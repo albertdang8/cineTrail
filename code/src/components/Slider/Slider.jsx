@@ -6,16 +6,15 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import "./Slider.css";
 
-function Slider({ baseUrl, apiKey }) {
+function Slider({ baseUrl, apiKey, imageBaseUrl }) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [index, setIndex] = useState(0);
-  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
   const [movieRatings, setMovieRatings] = useState([]);
 
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/movie/upcoming?api_key=${apiKey}`)
+      .get(`${baseUrl}/3/movie/upcoming?api_key=${apiKey}`)
       .then((res) => {
         console.log(res.data.results);
         setUpcomingMovies(res.data.results);
@@ -35,18 +34,24 @@ function Slider({ baseUrl, apiKey }) {
   };
 
   const handleRight = () => {
-    setIndex(index+1)
-    if(index === upcomingMovies.length-1) {
-      setIndex(0)
-    }
-  }
+    setIndex((prevIndex) => {
+      let newIndex = prevIndex + 1;
+      if (newIndex === upcomingMovies.length) {
+        newIndex = 0;
+      }
+      return newIndex;
+    });
+  };
 
   const handleLeft = () => {
-    setIndex(index-1)
-    if(index === 0) {
-      setIndex(upcomingMovies.length-1)
-    }
-  }
+    setIndex((prevIndex) => {
+      let newIndex = prevIndex - 1;
+      if (newIndex === -1) {
+        newIndex = upcomingMovies.length - 1;
+      }
+      return newIndex;
+    });
+  };
 
   return (
     <div style={sliderStyle}>
@@ -58,6 +63,7 @@ function Slider({ baseUrl, apiKey }) {
         <p className="slider-description">
           {upcomingMovies[index]?.overview.slice(0, 130)}...
         </p>
+        <Genres moviesGenres={upcomingMovies[index]?.genre_ids} baseUrl={baseUrl} apiKey={apiKey}/>
         <p>Release Date: {upcomingMovies[index]?.release_date}</p>
         <Ratings movieRating={movieRatings[index]} />
       </div>
