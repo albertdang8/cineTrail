@@ -9,8 +9,9 @@ import './App.css'
 
 
 function App() {
-  const apiKey = "6e3cfa8a59d38185c35ad08fb6420f20"
-  const baseUrl = "https://api.themoviedb.org/3"
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   return (
     <ThemeContextProvider>
       <BrowserRouter>
