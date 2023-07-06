@@ -6,11 +6,11 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import "./Slider.css";
 
-function Slider({ baseUrl, apiKey, imageBaseUrl }) {
+function Slider({ baseUrl, apiKey}) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [index, setIndex] = useState(0);
   const [movieRatings, setMovieRatings] = useState([]);
-
+  const imageBaseUrl = import.meta.env.VITE_IMAGE_URL;
 
   useEffect(() => {
     axios

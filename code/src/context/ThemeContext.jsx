@@ -1,25 +1,25 @@
-import { useState, createContext, useEffect } from "react";
+import React,{useState,createContext,useEffect} from 'react'
+export const ThemeContext = createContext()
 
-export const ThemeContext = createContext();
+
 
 export default function ThemeContextProvider(props) {
-  const [darkMode, setDarkMode] = useState(false);
+    const [darkMode,setDarkMode]=useState(true)
 
-  useEffect(() => {
-    const storedMode = localStorage.getItem("darkMode");
 
-    if (storedMode) {
-      setDarkMode(JSON.parse(storedMode));
-    }
-  }, []);
+    useEffect(() => {
+      const theme = localStorage.getItem('darkMode')
+      if (theme) {
+        setDarkMode(JSON.parse(theme))
+      }
+    }, [])
+    
+ 
 
-  useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
-
+ 
   return (
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-      {props.children}
+    <ThemeContext.Provider value={{darkMode,setDarkMode}}>
+        {props.children}
     </ThemeContext.Provider>
-  );
-}
+  )
+} 
