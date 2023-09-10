@@ -24,7 +24,7 @@ function Slider({baseUrl, apiKey}) {
   }, []);
 
   const sliderStyle = {
-    backgroundImage: `url(${import.meta.env.VITE_IMAGE_BASE_URL}${upcomingMovies[0]?.backdrop_path})`,
+    backgroundImage: `url(${import.meta.env.VITE_IMAGE_BASE_URL}${upcomingMovies[index]?.backdrop_path})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
