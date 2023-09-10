@@ -6,15 +6,14 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import "./Slider.css";
 
-function Slider({ baseUrl, apiKey}) {
+function Slider({baseUrl, apiKey}) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [index, setIndex] = useState(0);
   const [movieRatings, setMovieRatings] = useState([]);
-  const imageBaseUrl = import.meta.env.VITE_IMAGE_URL;
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/3/movie/upcoming?api_key=${apiKey}`)
+      .get(`${baseUrl}movie/upcoming?api_key=${apiKey}`)
       .then((res) => {
         console.log(res.data.results);
         setUpcomingMovies(res.data.results);
@@ -25,7 +24,7 @@ function Slider({ baseUrl, apiKey}) {
   }, []);
 
   const sliderStyle = {
-    backgroundImage: `url("${imageBaseUrl}${upcomingMovies[index]?.backdrop_path}")`,
+    backgroundImage: `url(${import.meta.env.VITE_IMAGE_BASE_URL}${upcomingMovies[0]?.backdrop_path})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",

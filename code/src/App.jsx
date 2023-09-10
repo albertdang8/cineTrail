@@ -27,6 +27,7 @@ function App() {
            <Route path="/myfavorites" element={<MyFavorites serverUrl={serverUrl} baseUrl={baseUrl} apiKey={apiKey}/>}/>
            <Route path="/signup" element={<SignUp serverUrl={serverUrl}/>}/>
            <Route path="/signin" element={<SignIn serverUrl={serverUrl}/>}/>
+           <Route path='*' element={<HomePage />} />
          </Routes>
       </CombinedContextProvider> 
     </BrowserRouter>
