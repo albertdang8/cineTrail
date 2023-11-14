@@ -9,13 +9,12 @@ import SignUp from './pages/SignUp/SignUp';
 import MyFavorites from './pages/MyFavorites/MyFavorites';
 
 
-
+const apiKey = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 function App() { 
 
-  const apiKey=import.meta.env.VITE_API_KEY;
-  const baseUrl=import.meta.env.VITE_BASE_URL;
-  const serverUrl=import.meta.env.VITE_SERVER_URL;
   
   return (
     <BrowserRouter>
